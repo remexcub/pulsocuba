@@ -6,6 +6,24 @@
     <title>PulsoCuba - Remesas a Cuba desde México</title>
     <meta name="description" content="Envía dinero a Cuba de forma rápida y segura. USD y CUP. El latido que conecta.">
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1144040594572380');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1144040594572380&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <style>
         * {
             margin: 0;
@@ -514,7 +532,7 @@
             </div>
 
             <div class="cta-buttons">
-                <a href="https://wa.me/5215512345678?text=Hola,%20quiero%20enviar%20dinero%20a%20Cuba" class="btn btn-whatsapp" target="_blank">
+                <a href="https://wa.me/5218140476782?text=Hola,%20quiero%20enviar%20dinero%20a%20Cuba" class="btn btn-whatsapp" target="_blank" onclick="if(typeof fbq !== 'undefined') fbq('track', 'Contact', {content_name: 'WhatsApp Click'});">
                     💬 Enviar por WhatsApp
                 </a>
                 <a href="#calculadora" class="btn btn-calculator">
@@ -687,11 +705,11 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <strong>📱 WhatsApp</strong>
-                    <p>+52 1 55 1234 5678</p>
+                    <p>+52 1 81 4047 6782</p>
                 </div>
                 <div class="contact-item">
                     <strong>📧 Email</strong>
-                    <p>contacto@pulsocuba.com</p>
+                    <p>pulsocuba@gmail.com</p>
                 </div>
                 <div class="contact-item">
                     <strong>🕐 Horario</strong>
@@ -699,7 +717,7 @@
                 </div>
             </div>
 
-            <a href="https://wa.me/5215512345678?text=Hola,%20quiero%20información%20sobre%20remesas" class="btn btn-whatsapp" target="_blank" style="margin-top: 2rem;">
+            <a href="https://wa.me/5218140476782?text=Hola,%20quiero%20información%20sobre%20remesas" class="btn btn-whatsapp" target="_blank" style="margin-top: 2rem;" onclick="if(typeof fbq !== 'undefined') fbq('track', 'Contact', {content_name: 'WhatsApp Footer Click'});">
                 💬 Chatear por WhatsApp
             </a>
         </section>
@@ -712,7 +730,7 @@
         <p>&copy; 2024 PulsoCuba. Todos los derechos reservados.</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ========================================
         // CONFIGURACIÓN DE TASAS Y MÍNIMOS
         // ========================================
@@ -843,9 +861,28 @@
 
             resultDiv.textContent = resultText;
             
+            // Enviar evento a Facebook Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'Cotización de remesa',
+                    content_category: type,
+                    value: amount,
+                    currency: type.includes('mxn') ? 'MXN' : 'USD'
+                });
+            }
+            
             if (hasDiscount) {
                 discountInfoDiv.textContent = discountText;
                 discountInfoDiv.style.display = 'block';
+                
+                // Evento especial para descuentos
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'AddToCart', {
+                        content_name: 'Cliente con descuento',
+                        content_category: type,
+                        value: amount
+                    });
+                }
             }
         }
 
@@ -880,7 +917,7 @@
                 if (category === 'todas' || item.dataset.category === category) {
                     item.style.display = 'block';
                 } else {
-                    item.style.display = 'none';
+                                   item.style.display = 'none';
                 }
             });
         }
